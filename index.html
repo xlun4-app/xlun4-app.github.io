@@ -3,7 +3,29 @@
 <head>
 	<title>app</title>
 <script>
+var p={
+	html:function(j){
+		document.body.innerHTML=j.src;
+		for(var c,s=document.querySelectorAll("script"),i=0,l=s.length;i<l;i++){
+			c=document.createElement("script");
+			if(s[i].src){
+				c.src=s[i].src;
+			}else{
+				c.text=s[i].text;
+			}
+			s[i].parentNode.insertBefore(c,s[i]);
+			s[i].remove();
+		}
+	}
+};
+
+function send(src){
+	parent.postMessage(src,"*");
+}
 window.onmessage=function(e){
+	if(e.origin!="https://xlun4.github.io")return;
+	var a,j=JSON.parse(e.data);
+	if(a=p[j.type])a(j);
 	console.log(e);
 };
 </script>
