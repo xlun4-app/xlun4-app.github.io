@@ -24,7 +24,7 @@ function send(src){
 }
 window.onmessage=function(e){
 	if(e.origin!="https://xlun4.github.io")return;
-	var a,j=JSON.parse(e.data);
+	var a,j=e.data;
 	if(a=p[j.type])a(j);
 	console.log(e);
 };
